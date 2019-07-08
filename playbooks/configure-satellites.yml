@@ -22,5 +22,5 @@
         validate_certs: "{{ satellite_validate_certs }}"
         name: "Lab"
         organizations:
-          - "Labdroid"
+          - "labdroid"
         state: present
