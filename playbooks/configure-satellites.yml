@@ -15,10 +15,13 @@
         state: present
 
     - name: Get our manifest from S3 storage
-      local_action: aws_s3
-        s3_url: https://minio.apps.home.labdroid.net
-        bucket: labdroid
-        object: manifest.zip
+      local_action:
+        module: aws_s3
+        s3_url: "{{https://minio.apps.home.labdroid.net
+	aws_access_key: "{{ minio_access_key }}"
+	aws_secret_key: "{{ minio_secret_key }}"
+	bucket: labdroid
+        object: "{{ manifest_filename }}"
         dest: /tmp/manifest.zip
         mode: get
 
