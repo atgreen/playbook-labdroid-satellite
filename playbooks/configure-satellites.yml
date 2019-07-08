@@ -21,4 +21,6 @@
         server_url: "https://{{ inventory_hostname }}/api/v2"
         validate_certs: "{{ satellite_validate_certs }}"
         name: "Lab"
+        organizations:
+          - "Labdroid"
         state: present
