@@ -1,0 +1,28 @@
+---
+- hosts: all
+  gather_facts: false  
+tasks:
+  - name: Create Labdroid Organization
+    local_action: 
+      module: foreman_organization
+      username: "{{ satellite_login }}"
+      password: "{{ satellite_password }}"
+      server_url: "{{ satellite_api_url }}"
+      validate_certs: "{{ satellite_validate_certs }}"
+      name: "Labdroid"
+      description: "Anthony Green's Home Lab Organization"
+      label: "labdroid"
+      state: present
+  - name: Create Labdroid Lab Location
+    local_action: 
+      module: foreman_location
+      username: "{{ satellite_login }}"
+      password: "{{ satellite_password }}"
+      server_url: "{{ satellite_api_url }}"
+      validate_certs: "{{ satellite_validate_certs }}"
+      name: "Lab"
+      description: "Anthony Green's Home Lab"
+      label: "lab"
+      organizations:
+        - "Labdroid"
+      state: present
