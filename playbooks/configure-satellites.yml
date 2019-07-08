@@ -13,14 +13,27 @@
         description: "Anthony Green's Home Lab Organization"
         label: "labdroid"
         state: present
-    - name: Create Labdroid Lab Location
-      local_action: 
-        module: foreman_location
+
+    - name: Upload a Red Hat subscription manifest
+      local_action:
+        module: katello_manifest
         username: "{{ satellite_login }}"
         password: "{{ satellite_password }}"
         server_url: "https://{{ inventory_hostname }}/api/v2"
         validate_certs: "{{ satellite_validate_certs }}"
-        name: "Lab"
-        organizations:
-          - "Labdroid"
+        organization: "Labdroid"
         state: present
+        manifest_path: "/tmp/manifest.zip"
+
+    # - name: Create Labdroid Lab Location
+    #   local_action: 
+    #     module: foreman_location
+    #     username: "{{ satellite_login }}"
+    #     password: "{{ satellite_password }}"
+    #     server_url: "https://{{ inventory_hostname }}/api/v2"
+    #     validate_certs: "{{ satellite_validate_certs }}"
+    #     name: "Lab"
+    #     organizations:
+    #       - "Labdroid"
+    #     state: present
+
