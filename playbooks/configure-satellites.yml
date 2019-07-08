@@ -17,7 +17,7 @@
     - name: Get our manifest from S3 storage
       local_action:
         module: aws_s3
-        s3_url: "{{https://minio.apps.home.labdroid.net
+        s3_url: "{{ s3_url }}"
         aws_access_key: "{{ minio_access_key }}"
         aws_secret_key: "{{ minio_secret_key }}"
         bucket: labdroid
