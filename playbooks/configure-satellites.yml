@@ -21,7 +21,7 @@
    #     dest: /tmp/manifest.zip
    #     mode: get
 
-   - name: Upload a Red Hat subscription manifest
+    - name: Upload a Red Hat subscription manifest
       local_action:
         module: katello_manifest
         username: "{{ satellite_login }}"
