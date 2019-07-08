@@ -14,12 +14,19 @@
         label: "labdroid"
         state: present
 
-    - name: Upload a Red Hat subscription manifest
+   # - name: Get our manifest from S3 storage
+   #   local_action: aws_s3
+   #     bucket: labdroid
+   #     object: manifest.zip
+   #     dest: /tmp/manifest.zip
+   #     mode: get
+
+   - name: Upload a Red Hat subscription manifest
       local_action:
         module: katello_manifest
         username: "{{ satellite_login }}"
         password: "{{ satellite_password }}"
-        server_url: "https://{{ inventory_hostname }}/api/v2"
+        server_url: "https://{{ inventory_hostname }}"
         verify_ssl: "{{ satellite_validate_certs }}"
         organization: "Labdroid"
         state: present
