@@ -25,6 +25,9 @@
         dest: /tmp/manifest.zip
         mode: get
 
+    - name: Did that actually work??
+      local_action: shell: ls -l /tmp/manifest.zip
+
     - name: Upload a Red Hat subscription manifest
       local_action:
         module: katello_manifest
