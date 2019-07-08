@@ -39,7 +39,7 @@
         verify_ssl: "{{ satellite_validate_certs }}"
         organization: "Labdroid"
         state: present
-        manifest_path: "/tmp/manifesttt.zip"
+        manifest_path: "/tmp/manifest.zip"
 
     # - name: Create Labdroid Lab Location
     #   local_action: 
