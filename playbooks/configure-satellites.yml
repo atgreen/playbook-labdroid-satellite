@@ -26,7 +26,8 @@
         mode: get
 
     - name: Did that actually work??
-      local_action: shell: ls -l /tmp/manifest.zip
+      local_action: shell ls -l /tmp/manifest.zip
+      register: out
 
     - name: Upload a Red Hat subscription manifest
       local_action:
