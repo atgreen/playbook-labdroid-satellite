@@ -15,6 +15,7 @@
         state: present
 
     - name: Get our manifest from S3 storage
+      run_once: true
       local_action:
         module: aws_s3
         s3_url: "{{ s3_url }}"
@@ -38,7 +39,7 @@
         verify_ssl: "{{ satellite_validate_certs }}"
         organization: "Labdroid"
         state: present
-        manifest_path: "/tmp/manifest.zip"
+        manifest_path: "/tmp/manifesttt.zip"
 
     # - name: Create Labdroid Lab Location
     #   local_action: 
