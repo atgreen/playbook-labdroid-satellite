@@ -1,0 +1,3 @@
+[submodule "github-foreman-ansible-modules"]
+	path = github-foreman-ansible-modules
+	url = https://github.com/theforeman/foreman-ansible-modules.git
