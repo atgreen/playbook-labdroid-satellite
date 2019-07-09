@@ -48,3 +48,13 @@
         organizations:
           - "Labdroid"
         state: present
+
+    - name: Delete the Default Organization
+      local_action: 
+        module: foreman_organization
+        username: "{{ satellite_login }}"
+        password: "{{ satellite_password }}"
+        server_url: "https://{{ inventory_hostname }}/api/v2"
+        validate_certs: "{{ satellite_validate_certs }}"
+        name: "Default"
+        state: absent
