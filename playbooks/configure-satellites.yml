@@ -23,12 +23,8 @@
         aws_secret_key: "{{ minio_secret_key }}"
         bucket: labdroid
         object: "{{ manifest_filename }}"
-        dest: /tmp/manifest.zip
+        dest: "/tmp/{{ manifest_filename }}"
         mode: get
-
-    - name: Did that actually work??
-      local_action: shell ls -l /tmp/manifest.zip
-      register: out
 
     - name: Upload a Red Hat subscription manifest
       local_action:
@@ -39,7 +35,7 @@
         verify_ssl: "{{ satellite_validate_certs }}"
         organization: "Labdroid"
         state: present
-        manifest_path: "/tmp/manifest.zip"
+        manifest_path: "/tmp/{{ manifest_filename }}"
 
     # - name: Create Labdroid Lab Location
     #   local_action: 
