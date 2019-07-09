@@ -59,15 +59,15 @@
         name: "Default Organization"
         state: absent
 
-    - name: Delete the Default Location
-      local_action: 
-        module: foreman_location
-        username: "{{ satellite_login }}"
-        password: "{{ satellite_password }}"
-        server_url: "https://{{ inventory_hostname }}/api/v2"
-        validate_certs: "{{ satellite_validate_certs }}"
-        name: "Default Location"
-        state: absent
+    # - name: Delete the Default Location
+    #   local_action: 
+    #     module: foreman_location
+    #     username: "{{ satellite_login }}"
+    #     password: "{{ satellite_password }}"
+    #     server_url: "https://{{ inventory_hostname }}/api/v2"
+    #     validate_certs: "{{ satellite_validate_certs }}"
+    #     name: "Default Location"
+    #     state: absent
 
     - name: "Enable/Disable katello repository set"
       vars:
