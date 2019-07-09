@@ -58,3 +58,34 @@
         validate_certs: "{{ satellite_validate_certs }}"
         name: "Default Organization"
         state: absent
+
+    - name: Delete the Default Location
+      local_action: 
+        module: foreman_location
+        username: "{{ satellite_login }}"
+        password: "{{ satellite_password }}"
+        server_url: "https://{{ inventory_hostname }}/api/v2"
+        validate_certs: "{{ satellite_validate_certs }}"
+        name: "Default Location"
+        state: absent
+
+    - name: "Enable/Disable katello repository set"
+      vars:
+        - name: "Red Hat Enterprise Linux 7 Server (RPMs)"
+        - organization: Labdroid
+        - state: enabled
+        - repositories:
+            - releasever: "7.3"
+              basearch: "x86_64"
+      local_action:
+        module: katello_repository_set
+        username: "{{ satellite_login }}"
+        password: "{{ satellite_password }}"
+        server_url: "https://{{ inventory_hostname }}/api/v2"
+        validate_certs: "{{ satellite_validate_certs }}"
+        name: "Red Hat Enterprise Linux 7 Server (RPMs)"
+        organization: Labdroid
+        product: Red Hat Enterprise Linux Server
+        state: enabled
+        repositories: "{{ repositories }}"
+        label: rhel-7-server-rpms
