@@ -71,7 +71,7 @@
 
     - name: "Enable/Disable katello repository set"
       vars:
-        - repositories:
+        - repos:
           - name: rhel-7-server-ansible-2.6-rpms
             arch: x86_64
           - name: rhel-7-server-extras-rpms
@@ -107,7 +107,5 @@
           - releasever: "{{ item.release | default (omit)}}"
             basearch: "{{ item.arch | default (omit)}}"
         state: enabled
-        repositories: "{{ repositories }}"
-        label: rhel-7-server-rpms
       loop: "{{ repos }}"
   
