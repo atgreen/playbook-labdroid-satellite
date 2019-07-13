@@ -75,17 +75,41 @@
         - organization: Labdroid
         - state: enabled
         - repositories:
-            - releasever: "7.3"
-              basearch: "x86_64"
-      local_action:
-        module: katello_repository_set
-        username: "{{ satellite_login }}"
-        password: "{{ satellite_password }}"
-        server_url: "https://{{ inventory_hostname }}/api/v2"
-        validate_certs: "{{ satellite_validate_certs }}"
-        name: "Red Hat Enterprise Linux 7 Server (RPMs)"
-        organization: Labdroid
-        product: Red Hat Enterprise Linux Server
-        state: enabled
-        repositories: "{{ repositories }}"
-        label: rhel-7-server-rpms
+            - name: rhel-7-server-ansible-2.6-rpms
+              arch: x86_64
+            - name: rhel-7-server-extras-rpms
+              arch: x86_64
+            - name: rhel-7-server-optional-rpms
+              arch: x86_64
+              release: 7Server
+            - name: rhel-7-server-rpms
+              arch: x86_64
+              release: 7Server
+            - name: rhel-7-server-rh-common-rpms
+              arch: x86_64
+              release: 7Server
+            - name: rhel-7-server-supplementary-rpms
+              arch: x86_64
+              release: 7Server
+            - name: rhel-7-server-satellite-maintenance-6-rpms
+              arch: x86_64
+            - name: rhel-7-server-satellite-tools-6.5-rpms
+              arch: x86_64
+            - name: rhel-server-rhscl-7-rpms
+              arch: x86_64
+              release: 7Server
+    local_action:
+      module: katello_repository_set
+      username: "{{ satellite_login }}"
+      password: "{{ satellite_password }}"
+      server_url: "https://{{ inventory_hostname }}/api/v2"
+      validate_certs: "{{ satellite_validate_certs }}"
+      organization: Labdroid
+      label: "{{ item.name }}"
+      repositories:
+        - releasever: "{{ item.release | default (omit)}}"
+          basearch: "{{ item.arch | default (omit)}}"
+      state: enabled
+      repositories: "{{ repositories }}"
+      label: rhel-7-server-rpms
+    loop: "{{ repos }}"
